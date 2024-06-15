@@ -1,0 +1,32 @@
+public class ShippingCompanyOptimization {
+    public static Integer minContainers(List<Integer> shipments, List<Integer> containerLimits) {
+        shipments.sort();
+        containerLimits.sort();
+        
+        Integer containersNeeded = 0;
+        Integer i = shipments.size() - 1; // index for shipments
+        Integer j = containerLimits.size() - 1; // index for containers
+        
+        while (i >= 0) {
+            if (j < 0) {
+                return -1; // insufficient container limit
+            }
+            
+            if (shipments[i] <= containerLimits[j]) {
+                shipments[i] = 0;
+                i -= 1;
+                containersNeeded += 1;
+            } else {
+                shipments[i] -= containerLimits[j];
+            }
+            
+            j -= 1;
+        }
+        
+        return containersNeeded;
+    }
+}
+
+List<Integer> shipments = new List<Integer> {10, 20, 30};
+List<Integer> containerLimits = new List<Integer> {15, 15, 20, 10};
+System.debug(ShippingCompanyOptimization.minContainers(shipments, containerLimits)); // Output: 4
