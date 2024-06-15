@@ -1,0 +1,21 @@
+class ListNode:
+    def _init_(self, x):
+        self.val = x
+        self.next = None
+
+def hasCycle(head):
+    visited = set()
+    current = head
+
+    while current:
+        if current in visited:
+            return True
+        visited.add(current)
+        current = current.next
+
+    return False
+
+
+20 -> 30 -> 40 -> 60 -> 80 -> 40
+
+6 -> 4 -> 2 -> 8
